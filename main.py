@@ -1,3 +1,4 @@
+# Init variables
 ledNumber = 0
 height = scrollbit.rows()
 width = scrollbit.cols()

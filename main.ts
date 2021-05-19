@@ -1,3 +1,4 @@
+//  Init variables
 let ledNumber = 0
 let height = scrollbit.rows()
 let width = scrollbit.cols()
