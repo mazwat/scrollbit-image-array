@@ -17,35 +17,36 @@ function ledPos(number: number): number[] {
     return [xpos, ypos]
 }
 
+//  Instructions scroller
+scrollbit.scrollText("Loads array images and wipes them. Press A - Wipe and Press B - Load Image")
 //  Create a chaser of lights with a start point (head) and an end point (tail) using A button   
 input.onButtonPressed(Button.A, function on_button_pressed_a() {
     let head: number[];
     let tail: number[];
-    let ledNumber = 0
+    let ledNumber2 = 0
     //  The offset determines the distances from the head to the tail of the chaser lights
     let offset = randint(0, 85)
-    while (ledNumber <= totalPixels + offset) {
+    while (ledNumber2 <= totalPixels + offset) {
         //  Send grid number and use function to output x and y
-        head = ledPos(ledNumber)
-        tail = ledPos(ledNumber - offset)
+        head = ledPos(ledNumber2)
+        tail = ledPos(ledNumber2 - offset)
         //  Assign tuple values to x and y to set pixel position in the Scroll:Bit. Set brightness randomly
         scrollbit.setPixel(head[0], head[1], randint(0, 255))
         scrollbit.setPixel(tail[0], tail[1], 0)
         scrollbit.show()
-        ledNumber += 1
+        ledNumber2 += 1
     }
 })
 input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    let head: number[];
-    let test: number;
-    let ledNumber = 0
+    let head2: number[];
+    let ledNumber3 = 0
     //  The offset determines the distances from the head to the tail of the chaser lights
-    while (ledNumber <= totalPixels) {
+    while (ledNumber3 <= totalPixels) {
         //  Send grid number and use function to output x and y. Added a 1 to be at the correct point in the array
-        head = ledPos(ledNumber +1)
+        head2 = ledPos(ledNumber3 + 1)
         //  Assign tuple values to x and y to set pixel position in the Scroll:Bit. Set brightness based on the image array above.
-        scrollbit.setPixel(head[0], head[1], arm[ledNumber])
+        scrollbit.setPixel(head2[0], head2[1], arm[ledNumber3])
         scrollbit.show()
-        ledNumber += 1
+        ledNumber3 += 1
     }
 })
