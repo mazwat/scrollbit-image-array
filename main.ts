@@ -8,7 +8,7 @@ function ledPos(number: number): number[] {
     //  Calculate x value from the array number
     let xpos = (number - 1) % width
     //  Calculate y value from the array number
-    let ypos = Math.round((number - 1) / width)
+    let ypos = Math.floor((number - 1) / width)
     //  return value as tuple
     return [xpos, ypos]
 }
@@ -18,9 +18,8 @@ input.onButtonPressed(Button.A, function on_button_pressed_a() {
     let head: number[];
     let tail: number[];
     let ledNumber = 0
-    let offset = randint(0, 50)
+    let offset = randint(0, 85)
     while (ledNumber <= totalPixels + offset) {
-        ledNumber += 1
         //  Send grid number and use function to output x and y
         head = ledPos(ledNumber)
         tail = ledPos(ledNumber - offset)
@@ -28,5 +27,6 @@ input.onButtonPressed(Button.A, function on_button_pressed_a() {
         scrollbit.setPixel(head[0], head[1], randint(0, 255))
         scrollbit.setPixel(tail[0], tail[1], 0)
         scrollbit.show()
+        ledNumber += 1
     }
 })
