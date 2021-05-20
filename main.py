@@ -15,6 +15,7 @@ def ledPos(number: number):
 
 def on_button_pressed_a():
     ledNumber = 0
+    # The offset determines the distances from the head to the tail of the chaser lights
     offset = randint(0, 85)
     while ledNumber <= totalPixels + offset:       
         # Send grid number and use function to output x and y
