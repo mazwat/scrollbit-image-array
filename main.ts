@@ -23,30 +23,30 @@ scrollbit.scrollText("Loads array images and wipes them. Press A - Wipe and Pres
 input.onButtonPressed(Button.A, function on_button_pressed_a() {
     let head: number[];
     let tail: number[];
-    let ledNumber2 = 0
+    let ledNumber = 0
     //  The offset determines the distances from the head to the tail of the chaser lights
     let offset = randint(0, 85)
-    while (ledNumber2 <= totalPixels + offset) {
+    while (ledNumber <= totalPixels + offset) {
         //  Send grid number and use function to output x and y
-        head = ledPos(ledNumber2)
-        tail = ledPos(ledNumber2 - offset)
+        head = ledPos(ledNumber)
+        tail = ledPos(ledNumber - offset)
         //  Assign tuple values to x and y to set pixel position in the Scroll:Bit. Set brightness randomly
         scrollbit.setPixel(head[0], head[1], randint(0, 255))
         scrollbit.setPixel(tail[0], tail[1], 0)
         scrollbit.show()
-        ledNumber2 += 1
+        ledNumber += 1
     }
 })
 input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    let head2: number[];
-    let ledNumber3 = 0
+    let head: number[];
+    let ledNumber = 0
     //  The offset determines the distances from the head to the tail of the chaser lights
-    while (ledNumber3 <= totalPixels) {
+    while (ledNumber <= totalPixels) {
         //  Send grid number and use function to output x and y. Added a 1 to be at the correct point in the array
-        head2 = ledPos(ledNumber3 + 1)
+        head = ledPos(ledNumber + 1)
         //  Assign tuple values to x and y to set pixel position in the Scroll:Bit. Set brightness based on the image array above.
-        scrollbit.setPixel(head2[0], head2[1], arm[ledNumber3])
+        scrollbit.setPixel(head[0], head[1], arm[ledNumber])
         scrollbit.show()
-        ledNumber3 += 1
+        ledNumber += 1
     }
 })
