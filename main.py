@@ -3,15 +3,31 @@ ledNumber = 0
 height = scrollbit.rows()
 width = scrollbit.cols()
 totalPixels = scrollbit.rows() * scrollbit.cols()
-
+frameRate = 200
 # Sample image arrays for custom images 17x7 in grayscale from 0-255
 
-eyePic = [255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+eyePic1 = [255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 255,255,255,255,255,64,64,0,0,0,64,98,64,255,255,255,255,
 255,255,255,98,98,98,64,64,64,255,64,160,98,64,255,255,255,
 255,255,255,98,160,64,98,0,0,255,98,255,160,98,98,255,255,
 255,255,98,160,255,98,98,0,0,64,98,255,64,160,255,255,255,
 255,255,255,255,255,160,98,98,98,98,160,64,160,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255]
+
+eyePic2 = [255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,98,64,98,0,0,255,98,98,160,255,255,255,255,
+255,255,98,160,255,98,98,0,0,64,98,255,64,160,255,255,255,
+255,255,255,255,255,160,98,98,98,98,160,64,160,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255]
+
+eyePic3 = [255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
+255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255]
 
 bitFigures = [0,0,0,0,0,0,0,63,0,0,0,0,0,255,255,0,0,
@@ -39,8 +55,17 @@ def ledPos(number: number):
     # return value as tuple
     return [xpos, ypos]
 
+    # Function takes a numbered grid array of values and converts them into cartesion X and Y
+def displayImage(image):
+    scrollbit.clear()
+    for i in range(totalPixels):
+        head = ledPos(i + 1)
+        # Assign tuple values to x and y to set pixel position in the Scroll:Bit. Set brightness based on the image array above.
+        scrollbit.set_pixel(head[0], head[1], image[i])
+    scrollbit.show()  
+
 # Instructions scroller
-scrollbit.scroll_text("Press A - Load Image & Press B - Wipe Image")
+# scrollbit.scroll_text("Press A - Load Image & Press B - Wipe Image")
 
 # Create a chaser of lights with a start point (head) and an end point (tail) using A button   
 def on_button_pressed_b():
@@ -65,8 +90,23 @@ def on_button_pressed_a():
         # Send grid number and use function to output x and y. Added a 1 to be at the correct point in the array
         head = ledPos(ledNumber + 1)
         # Assign tuple values to x and y to set pixel position in the Scroll:Bit. Set brightness based on the image array above.
-        scrollbit.set_pixel(head[0], head[1], eyePic[ledNumber])
+        scrollbit.set_pixel(head[0], head[1], eyePic1[ledNumber])
         scrollbit.show()
         ledNumber += 1
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
+
+
+
+def on_forever():
+    displayImage(eyePic1)
+    basic.pause(frameRate)
+    displayImage(eyePic2)
+    basic.pause(frameRate)
+    displayImage(eyePic3)
+    basic.pause(500)
+    displayImage(eyePic2)
+    basic.pause(frameRate)
+    displayImage(eyePic1)
+    basic.pause(frameRate)
+basic.forever(on_forever)
