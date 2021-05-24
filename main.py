@@ -108,5 +108,5 @@ def on_forever():
     displayImage(eyePic2)
     basic.pause(frameRate)
     displayImage(eyePic1)
-    basic.pause(frameRate)
+    basic.pause(1000)
 basic.forever(on_forever)

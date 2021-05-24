@@ -75,5 +75,5 @@ basic.forever(function on_forever() {
     displayImage(eyePic2)
     basic.pause(frameRate)
     displayImage(eyePic1)
-    basic.pause(frameRate)
+    basic.pause(1000)
 })
